@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SmartQueue Admin</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f4f7fb;
+            color: #1f2937;
+        }
+
+        .header {
+            background: #172554;
+            color: white;
+            padding: 25px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 25px;
+            font-weight: bold;
+        }
+
+        .admin-badge {
+            background: #2563eb;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+        }
+
+        .container {
+            width: 85%;
+            max-width: 1200px;
+            margin: 35px auto;
+        }
+
+        .welcome {
+            margin-bottom: 30px;
+        }
+
+        .welcome h1 {
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+
+        .welcome p {
+            color: #6b7280;
+        }
+
+        .dashboard-card {
+            background: white;
+            padding: 30px;
+            border-radius: 18px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            margin-bottom: 30px;
+        }
+
+        .dashboard-card h2 {
+            margin-bottom: 20px;
+            color: #172554;
+        }
+
+        .serving {
+            text-align: center;
+            background: #eff6ff;
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+        }
+
+        .serving-token {
+            font-size: 50px;
+            font-weight: bold;
+            color: #2563eb;
+            margin: 10px;
+        }
+
+        .serving-name {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .btn {
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 15px 25px;
+            border-radius: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .btn:hover {
+            background: #1d4ed8;
+        }
+
+        .completed-card {
+            display: grid;
+            grid-template-columns: 90px 1fr 120px;
+            align-items: center;
+            padding: 15px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .completed-token {
+            background: #dcfce7;
+            color: #15803d;
+            padding: 8px;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .completed-name {
+            padding-left: 15px;
+            font-weight: bold;
+        }
+
+        .completed-status {
+            color: #16a34a;
+            text-align: right;
+            font-weight: bold;
+        }
+
+        .empty {
+            color: #9ca3af;
+            padding: 15px 0;
+        }
+
+        .back {
+            display: inline-block;
+            margin-top: 10px;
+            color: #2563eb;
+            text-decoration: none;
+        }
+
+        @media (max-width: 700px) {
+
+            .header {
+                padding: 20px;
+            }
+
+            .container {
+                width: 92%;
+            }
+
+            .completed-card {
+                grid-template-columns: 60px 1fr;
+                gap: 10px;
+            }
+
+            .completed-status {
+                grid-column: 2;
+                text-align: left;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+<header class="header">
+
+    <div class="logo">
+        SmartQueue
+    </div>
+    <a href="/logout" class="admin-badge">🚪 Logout</a>
+
+</header>
+
+
+<main class="container">
+
+    <div class="welcome">
+
+        <h1>Queue Management</h1>
+
+        <p>
+            Manage customers and control the queue.
+        </p>
+
+    </div>
+
+
+    <!-- CURRENTLY SERVING -->
+
+    <section class="dashboard-card">
+
+        <h2>📢 Currently Serving</h2>
+
+        {% if current_serving %}
+
+        <div class="serving">
+
+            <div class="serving-token">
+                {{ current_serving.token }}
+            </div>
+
+            <div class="serving-name">
+                {{ current_serving.name }}
+            </div>
+
+        </div>
+
+        {% else %}
+
+        <div class="empty">
+            No customer is currently being served.
+        </div>
+
+        {% endif %}
+
+
+        <form action="/next" method="POST">
+
+            <button type="submit" class="btn">
+                📢 Call Next Customer
+            </button>
+
+        </form>
+
+    </section>
+
+
+    <!-- COMPLETED CUSTOMERS -->
+
+    <section class="dashboard-card">
+
+        <h2>✅ Completed Customers</h2>
+
+        {% if completed_customers %}
+
+            {% for customer in completed_customers %}
+
+            <div class="completed-card">
+
+                <div class="completed-token">
+                    {{ customer.token }}
+                </div>
+
+                <div class="completed-name">
+                    {{ customer.name }}
+                </div>
+
+                <div class="completed-status">
+                    Completed
+                </div>
+
+            </div>
+
+            {% endfor %}
+
+        {% else %}
+
+            <div class="empty">
+                No customers completed yet.
+            </div>
+
+        {% endif %}
+
+    </section>
+
+
+    <a href="/" class="back">
+        ← Back to Customer Page
+    </a>
+
+</main>
+
+
+</body>
+</html>

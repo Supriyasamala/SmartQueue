@@ -1,0 +1,6 @@
+queue.db
+build/
+dist/
+__pycache__/
+.ipynb_checkpoints/
+*.pyc
