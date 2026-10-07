@@ -36,3 +36,17 @@ SmartQueue helps organizations manage customer queues digitally. Customers can g
 
 ```bash
 pip install Flask
+##Screenshots
+
+### Home Page
+
+![SmartQueue Home Page](screenshots/Screenshot%20%28168%29.png)
+### Queue Management
+
+![SmartQueue Queue Management](screenshots/Screenshot%20%28169%29.png)
+### Admin Dashboard
+
+![SmartQueue Admin Dashboard](screenshots/Screenshot%20%28170%29.png)
+### Token Search / Status
+
+![SmartQueue Token Search](screenshots/Screenshot%20%28171%29.png)
