@@ -34,7 +34,8 @@ SmartQueue helps organizations manage customer queues digitally. Customers can g
 3. Open a terminal in the project folder.
 4. Install Flask:
 
-```bash
+'''text
+'''bash
 pip install Flask
 ##Screenshots
 
